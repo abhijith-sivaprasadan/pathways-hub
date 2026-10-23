@@ -25,12 +25,19 @@ def main():
     brief.add_argument("--trajectory", help="Hash-verified supplementary decadal JSON")
     brief.add_argument("--milestones", default="protocols/workstream_v3.json")
     brief.add_argument("--output", default="outputs/briefings/coverage.md")
+    cycle = sub.add_parser("simulate-cycle",help="Run FICTIONAL three-team correction and SHA release")
+    cycle.add_argument("--root",default=".")
+    cycle.add_argument("--output",default="outputs/synthetic_cycle")
     args = parser.parse_args()
     if args.command == "intake":
         p = read_json(args.protocol)
         rows = [validate_submission(read_json(f), p, Path(f).name) for f in args.submissions]
         x = write_report(rows, p, args.output)
         print(f"Simulated intake: {len(rows)} submissions, {x['issue_count']} issues")
+    elif args.command == "simulate-cycle":
+        from .simulation import run_simulated_cycle
+        r=run_simulated_cycle(args.root,args.output)
+        print("FICTIONAL protocol-correction round accepted:",r["accepted_fixture_release_sha256"])
     elif args.command == "briefing":
         from .briefing import run_briefing
         result = run_briefing(args.manifest, args.artifact, args.milestones, args.output, trajectory_path=args.trajectory)

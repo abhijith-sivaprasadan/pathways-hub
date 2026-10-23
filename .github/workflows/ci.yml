@@ -29,8 +29,23 @@ jobs:
           assert "SYNTHETIC_TEST_ONLY" in Path("outputs/exercise/briefing.md").read_text()
           print("All test-intake assertions passed.")
           PY
+      - name: Execute corrected synthetic three-team cycle and validate traceability
+        run: |
+          python -m pathways_hub simulate-cycle --output outputs/synthetic_cycle
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path("outputs/synthetic_cycle/cycle.json").read_text())
+          assert len(p["decisions"])==2
+          assert p["remaining_issue_count"]==0
+          assert set(p["corrected_statuses"].values())=={"ACCEPTED_SCHEMA_ONLY"}
+          assert p["scientific_approval"]=="NOT_CLAIMED"
+          assert p["human_coordination"]=="NOT_DEMONSTRATED"
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: synthetic-intake-audit
-          path: outputs/exercise/
+          path: |
+            outputs/exercise/
+            outputs/synthetic_cycle/
           retention-days: 30
