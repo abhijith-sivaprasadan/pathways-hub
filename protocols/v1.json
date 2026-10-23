@@ -1,0 +1,18 @@
+{
+  "protocol_version": "1.0.0",
+  "evidence_level": "SYNTHETIC_TEST_ONLY",
+  "regions": [
+    "World"
+  ],
+  "variables": [
+    "Emissions|CO2"
+  ],
+  "units": {
+    "Emissions|CO2": "Mt CO2/yr"
+  },
+  "years": [
+    2030,
+    2050
+  ],
+  "human_scientific_signoff": "REQUIRED"
+}

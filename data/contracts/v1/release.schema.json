@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Scientific release contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "release_id",
+    "source_commit",
+    "provenance_type",
+    "metric_id",
+    "identifiability_level",
+    "publication_permission",
+    "dataset_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "release_id": {
+      "type": "string"
+    },
+    "source_commit": {
+      "type": "string"
+    },
+    "provenance_type": {
+      "enum": [
+        "PUBLISHED_PUBLIC_TUTORIAL",
+        "PUBLISHED_RESEARCH",
+        "SYNTHETIC_TEST_ONLY"
+      ]
+    },
+    "metric_id": {
+      "type": "string"
+    },
+    "identifiability_level": {
+      "enum": [
+        "I0",
+        "I1",
+        "I2",
+        "I3"
+      ]
+    },
+    "publication_permission": {
+      "enum": [
+        "DERIVED_ANALYSIS_ONLY",
+        "PUBLIC_DERIVED",
+        "NO_REHOST",
+        "SYNTHETIC_TEST_ONLY"
+      ]
+    },
+    "dataset_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "scientific_status": {
+      "type": "string"
+    }
+  }
+}
