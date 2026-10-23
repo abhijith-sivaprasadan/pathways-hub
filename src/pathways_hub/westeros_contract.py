@@ -125,6 +125,11 @@ def validate_westeros_bundle(index, raw_artifact, *, expected_sha256=None):
         }
     baseline = objectives["baseline"]
     bounded = objectives["emission_bound"]
+    difference = bounded - baseline
+    change_pct = difference / baseline * 100 if baseline != 0 else None
+    if not math.isfinite(difference) or (change_pct is not None and not math.isfinite(change_pct)):
+        return {"status": "BLOCKED", "problems": ["Non-finite derived comparison"],
+                "independently_reproduced": False, "scientific_scope": SCOPE}
     return {
         "status": "ACCEPTED_AUTHOR_REPORTED_LOCAL",
         "integrity": "BYTE_HASH_MATCH_AND_SCHEMA_CHECKED",
@@ -134,8 +139,8 @@ def validate_westeros_bundle(index, raw_artifact, *, expected_sha256=None):
         "artifact_sha256": digest,
         "scientific_scope": SCOPE,
         "scenarios": objectives,
-        "objective_difference_native": bounded - baseline,
-        "objective_change_percent": (bounded - baseline) / baseline * 100 if baseline != 0 else None,
+        "objective_difference_native": difference,
+        "objective_change_percent": change_pct,
         "independently_reproduced": False,
         "scientifically_reviewed": False,
         "warning": "Matching hashes on two files do not prove authorship or GAMS execution. The source solver did not run in PathwaysHub.",
