@@ -16,6 +16,11 @@ def main():
     consume.add_argument("--manifest", required=True)
     consume.add_argument("--artifact", help="results.json that corresponds to manifest dataset_sha256")
     consume.add_argument("--output", default="outputs/contract")
+    wx = sub.add_parser("consume-westeros", help="Validate sanitized, author-reported local GAMS evidence")
+    wx.add_argument("--manifest", required=True, help="westeros_evidence.manifest.json")
+    wx.add_argument("--artifact", required=True, help="westeros_evidence.json")
+    wx.add_argument("--expected-sha256", help="Optional digest obtained through an independent trusted channel")
+    wx.add_argument("--output", default="outputs/westeros_contract")
     review = sub.add_parser("review-ledger", help="Validate checksum event ledger and approval separation")
     review.add_argument("--input", required=True)
     review.add_argument("--output", default="outputs/review/validation.json")
@@ -53,6 +58,19 @@ def main():
         from .review import run_review
         result = run_review(args.input, args.output)
         print(result["status"], result["last_state"])
+    elif args.command == "consume-westeros":
+        from .westeros_contract import validate_westeros_bundle
+        index = read_json(args.manifest)
+        raw = Path(args.artifact).read_bytes()
+        decision = validate_westeros_bundle(index, raw, expected_sha256=args.expected_sha256)
+        dest = Path(args.output)
+        dest.mkdir(parents=True, exist_ok=True)
+        (dest / "decision.json").write_text(
+            json.dumps(decision, indent=2, sort_keys=True, allow_nan=False) + "\n", encoding="utf-8")
+        print(decision["status"])
+        if decision["status"] == "BLOCKED":
+            print("Problems:", "; ".join(decision["problems"]))
+            raise SystemExit(2)
     elif args.command == "consume":
         data = Path(args.artifact).read_bytes() if args.artifact else None
         decision = validate_release(read_json(args.manifest), data)
