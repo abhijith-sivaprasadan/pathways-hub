@@ -81,6 +81,13 @@
       "status": "DONE_TESTED",
       "gate": "1,202 climate-vetted; 345 net-EIP/AFOLU/land/BECCS/DAC, 261 plus fossil CCS co-report; source hashes and CI documented",
       "evidence_url": "https://github.com/abhijith-sivaprasadan/residual-pathways/blob/main/docs/ar6_teaching_2050_findings.md"
+    },
+    {
+      "id": "RP-10",
+      "name": "RP24 source-grounded case selection and automated diagnostics",
+      "status": "DONE_TESTED",
+      "gate": "24 distinct World vetted cases C1-C8 x3, 7 six-variable-complete, 19 arithmetic-diagnostic-capable; zero human reviews and zero verified I3",
+      "evidence_url": "https://github.com/abhijith-sivaprasadan/residual-pathways/blob/main/docs/research_note_02.md"
     }
   ]
 }
