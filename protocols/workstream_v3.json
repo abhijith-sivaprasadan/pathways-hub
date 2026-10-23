@@ -24,8 +24,8 @@
     {
       "id": "RP-04",
       "name": "AR6 model-scenario variable coverage and class I3",
-      "status": "NOT_STARTED",
-      "gate": "Real dataset/metadata/source definitions, reviewed partition"
+      "status": "IN_PROGRESS",
+      "gate": "2050 reporting audit completed on public AR6 teaching source; canonical World v1.1 and I3 accounting still unverified"
     },
     {
       "id": "RP-05",
@@ -74,6 +74,13 @@
       "name": "Evidence-constrained briefing from science releases",
       "status": "DONE_TESTED",
       "gate": "Hash-checked source and decadal trajectory with CI-generated briefing"
+    },
+    {
+      "id": "RP-09",
+      "name": "Climate-vetted teaching-source identifiability preflight",
+      "status": "DONE_TESTED",
+      "gate": "1,202 climate-vetted; 345 net-EIP/AFOLU/land/BECCS/DAC, 261 plus fossil CCS co-report; source hashes and CI documented",
+      "evidence_url": "https://github.com/abhijith-sivaprasadan/residual-pathways/blob/main/docs/ar6_teaching_2050_findings.md"
     }
   ]
 }
