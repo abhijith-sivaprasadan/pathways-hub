@@ -61,3 +61,17 @@ def test_wrong_source_commit_rejected():
     manifest, raw = bundle(d)
     with pytest.raises(BriefingError, match="revision"):
         make_briefing(manifest, raw, milestones=MILESTONES)
+
+
+def test_signed_decadal_briefing_requires_manifest_bound_sha():
+    manifest, raw = bundle()
+    t = {"trajectory_schema": "reported_co2_decadal.v1", "variable":"Emissions|CO2",
+         "unit":"Mt CO2/yr", "observations":[{"year":2100,"value":-1,"meaning":"reported_CO2_not_a_gross_or_CDR_decomposition"}],
+         "year_summaries":[{"year":2100,"matched_observations":1,"negative_reported_co2_count":1}]}
+    trajectory = json.dumps(t).encode()
+    manifest["decadal_schema"] = "reported_co2_decadal.v1"
+    manifest["decadal_sha256"] = hashlib.sha256(trajectory).hexdigest()
+    report = make_briefing(manifest, raw, milestones=MILESTONES, trajectory_raw=trajectory)
+    assert "1 of 1 matched source observations are negative" in report
+    with pytest.raises(BriefingError, match="SHA-256"):
+        make_briefing(manifest, raw, milestones=MILESTONES, trajectory_raw=trajectory + b" ")

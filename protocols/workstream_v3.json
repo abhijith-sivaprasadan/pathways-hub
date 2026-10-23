@@ -72,8 +72,8 @@
     {
       "id": "PH-04",
       "name": "Evidence-constrained briefing from science releases",
-      "status": "IN_PROGRESS",
-      "gate": "Real pinned source, validated contract, no gross overclaim"
+      "status": "DONE_TESTED",
+      "gate": "Hash-checked source and decadal trajectory with CI-generated briefing"
     }
   ]
 }

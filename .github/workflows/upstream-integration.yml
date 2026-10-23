@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: abhijith-sivaprasadan/residual-pathways
-          ref: f35db7c1397f13096400405769b6581fdd359846
+          ref: 255c585d799be377b60bfaf02a24cdfcdd0bded6
           path: upstream
       - uses: actions/setup-python@v5
         with:
@@ -41,13 +41,14 @@ jobs:
           PY
       - name: Build evidence-scoped scientific and milestone briefing
         run: |
-          python -m pathways_hub briefing --manifest outputs/science/release/manifest.json --artifact outputs/science/results.json --milestones protocols/workstream_v3.json --output outputs/briefings/scientific_status.md
+          python -m pathways_hub briefing --manifest outputs/science/release/manifest.json --artifact outputs/science/results.json --trajectory outputs/science/decadal_trajectory.json --milestones protocols/workstream_v3.json --output outputs/briefings/scientific_status.md
           python - <<'PY'
           from pathlib import Path
           t=Path("outputs/briefings/scientific_status.md").read_text()
           assert "Neither residual gross CO2 nor carbon dioxide removal" in t
           assert "READY_COVERAGE_ONLY" in t
           assert "AR6 World" in t
+          assert "9 of 18 matched source observations are negative" in t
           PY
       - uses: actions/upload-artifact@v4
         with:

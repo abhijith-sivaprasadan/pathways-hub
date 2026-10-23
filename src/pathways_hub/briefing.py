@@ -6,6 +6,7 @@ release; semantic gate and provenance survive downstream transformations.
 from __future__ import annotations
 from pathlib import Path
 import json
+import hashlib
 from .core import validate_release
 
 
@@ -13,7 +14,7 @@ class BriefingError(ValueError):
     pass
 
 
-def make_briefing(manifest: dict, artifact: bytes, *, milestones: dict) -> str:
+def make_briefing(manifest: dict, artifact: bytes, *, milestones: dict, trajectory_raw: bytes | None = None) -> str:
     decision = validate_release(manifest, artifact)
     if decision["status"] == "BLOCKED":
         raise BriefingError("Science release blocked: " + "; ".join(decision["problems"]))
@@ -65,6 +66,28 @@ def make_briefing(manifest: dict, artifact: bytes, *, milestones: dict) -> str:
             if not isinstance(item[k], str) or "|" in item[k] or "\n" in item[k]:
                 raise BriefingError("Invalid milestone field for Markdown table")
         out.append(f"| {item['id']}: {item['name']} | {item['status']} | {item['gate']} |")
+    if trajectory_raw is not None:
+        declared = manifest.get("decadal_sha256")
+        if not declared or hashlib.sha256(trajectory_raw).hexdigest() != declared:
+            raise BriefingError("Unverified or wrong decadal trajectory SHA-256")
+        try:
+            series = json.loads(trajectory_raw.decode("utf-8"))
+        except (ValueError, UnicodeError) as exc:
+            raise BriefingError("Invalid decadal JSON") from exc
+        if series.get("trajectory_schema") != manifest.get("decadal_schema"):
+            raise BriefingError("Decadal schema or manifest mismatch")
+        if series.get("variable") != "Emissions|CO2" or series.get("unit") != "Mt CO2/yr":
+            raise BriefingError("Unexpected trajectory variable/unit")
+        if len(series.get("observations", [])) != sum(
+                x["matched_observations"] for x in series.get("year_summaries", [])):
+            raise BriefingError("Decadal observation counts disagree")
+        last = next((x for x in series["year_summaries"] if x["year"] == 2100), None)
+        if last is not None:
+            out.extend(["", "## Signed trajectory observation",
+                        f"- At 2100, {last['negative_reported_co2_count']} of "
+                        f"{last['matched_observations']} matched source observations are negative.",
+                        "- Negative aggregate CO2 is not positive gross emissions. It does NOT by itself "
+                        "identify net, atmospheric removal, or fossil CCS components."])
     out += ["", "## Decisions for real work",
             "",
             "1. Acquire licensed AR6 World v1.1 and metadata through the official IIASA explorer; record exact source permissions.",
@@ -77,11 +100,12 @@ def make_briefing(manifest: dict, artifact: bytes, *, milestones: dict) -> str:
     return "\n".join(out)
 
 
-def run_briefing(manifest_path, artifact_path, milestones_path, output):
+def run_briefing(manifest_path, artifact_path, milestones_path, output, trajectory_path=None):
     manifest = json.loads(Path(manifest_path).read_text(encoding="utf-8"))
     raw = Path(artifact_path).read_bytes()
     milestones = json.loads(Path(milestones_path).read_text(encoding="utf-8"))
-    doc = make_briefing(manifest, raw, milestones=milestones)
+    trajectory_raw = Path(trajectory_path).read_bytes() if trajectory_path else None
+    doc = make_briefing(manifest, raw, milestones=milestones, trajectory_raw=trajectory_raw)
     p = Path(output)
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(doc, encoding="utf-8")

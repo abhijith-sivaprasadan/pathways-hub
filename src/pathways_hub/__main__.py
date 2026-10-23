@@ -22,6 +22,7 @@ def main():
     brief = sub.add_parser("briefing", help="Evidence-locked briefing from exact science artifact")
     brief.add_argument("--manifest", required=True)
     brief.add_argument("--artifact", required=True)
+    brief.add_argument("--trajectory", help="Hash-verified supplementary decadal JSON")
     brief.add_argument("--milestones", default="protocols/workstream_v3.json")
     brief.add_argument("--output", default="outputs/briefings/coverage.md")
     args = parser.parse_args()
@@ -32,7 +33,7 @@ def main():
         print(f"Simulated intake: {len(rows)} submissions, {x['issue_count']} issues")
     elif args.command == "briefing":
         from .briefing import run_briefing
-        result = run_briefing(args.manifest, args.artifact, args.milestones, args.output)
+        result = run_briefing(args.manifest, args.artifact, args.milestones, args.output, trajectory_path=args.trajectory)
         print("Wrote evidence-locked briefing:", result)
     elif args.command == "review-ledger":
         from .review import run_review
