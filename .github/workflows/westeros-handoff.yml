@@ -30,8 +30,9 @@ jobs:
           import json
           from pathlib import Path
           from tempfile import TemporaryDirectory
+          from subprocess import run
+          import sys
           from residual_pathways.messageix_westeros import NOTEBOOKS, UPSTREAM_COMMIT, source_url
-          from residual_pathways.westeros_evidence import export_westeros_evidence
           from pathways_hub.westeros_contract import validate_westeros_bundle
 
           # Artificial fixture simulates the private manifest schema.
@@ -69,13 +70,20 @@ jobs:
               src = root / "manifest.private.json"
               src.write_text(json.dumps(fake), encoding="utf-8")
               bundle_dir = root / "derived"
-              export_westeros_evidence(src, bundle_dir)
-              index = json.loads((bundle_dir / "westeros_evidence.manifest.json").read_text())
-              raw = (bundle_dir / "westeros_evidence.json").read_bytes()
-              accepted = validate_westeros_bundle(index, raw)
+              run([sys.executable, "-m", "residual_pathways", "westeros-export",
+                   "--input", str(src), "--output", str(bundle_dir)], check=True)
+              index_path = bundle_dir / "westeros_evidence.manifest.json"
+              artifact_path = bundle_dir / "westeros_evidence.json"
+              index = json.loads(index_path.read_text())
+              raw = artifact_path.read_bytes()
+              decision_dir = root / "decision"
+              run([sys.executable, "-m", "pathways_hub", "consume-westeros",
+                   "--manifest", str(index_path), "--artifact", str(artifact_path),
+                   "--output", str(decision_dir)], check=True)
+              accepted = json.loads((decision_dir / "decision.json").read_text())
               assert accepted["status"] == "ACCEPTED_AUTHOR_REPORTED_LOCAL"
               assert accepted["independently_reproduced"] is False
               assert accepted["objective_difference_native"] == 2.0
               assert validate_westeros_bundle(index, raw + b" ")["status"] == "BLOCKED"
-              print("SYNTHETIC_CONTRACT_ROUNDTRIP_PASSED — NO GAMS EXECUTION")
+              print("SYNTHETIC_CONTRACT_CLI_ROUNDTRIP_PASSED — NO GAMS EXECUTION")
           PY
