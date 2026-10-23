@@ -14,7 +14,7 @@
 | Westeros baseline | 159025.830480 | Optimal |
 | Westeros emissions bound | 191510.804279 | Optimal |
 
-Objective difference: **32484.973799 native objective units**, or approximately **20.43%** above baseline. This is a *stylized tutorial comparison*, not a real-world cost estimate, not an AR6 scenario, and not evidence of physically decomposed gross CO2/CDR.
+These figures are the **GAMS/CPLEX console objectives**, not the rounded scalar values persisted in ixmp. The console-objective difference is **32484.973799 native objective units**, or about **20.43%** above baseline. The separate, hash-linked export below correctly uses the persisted ixmp objectives, not an invented higher-precision database value. This is a *stylized tutorial comparison*, not a real-world cost estimate, not an AR6 scenario, and not evidence of physically decomposed gross CO2/CDR.
 
 The final local runner output included:
 
@@ -22,13 +22,30 @@ The final local runner output included:
 Status: ACTUAL_MESSAGEIX_GAMS_SOLVED
 ```
 
-The author reported the manifest at `results/messageix_private/20261023T230104Z_e182e730/manifest.private.json` on their own machine. **That private manifest and its original output files have not been provided to this repository or independently hash-verified by PathwaysHub.** The runner's status is supported here by the author-supplied terminal transcript only.
+The original private manifest remains on the author's computer at `results/messageix_private/20261023T230104Z_e182e730/manifest.private.json`. It was not uploaded to this repository.
+
+## Local evidence handoff — completed, author reported (2026-10-24)
+
+The author supplied a second Windows PowerShell transcript confirming:
+
+1. Inspection of that **private ixmp manifest**, which reported `ACTUAL_MESSAGEIX_GAMS_SOLVED` and `has_solution: true` for both scenarios.
+2. The new `residual_pathways westeros-export` command successfully produced a **sanitized, derived two-file bundle** in a gitignored output directory.
+3. `pathways_hub consume-westeros` read those two files locally and emitted **`ACCEPTED_AUTHOR_REPORTED_LOCAL`** with integrity state **`BYTE_HASH_MATCH_AND_SCHEMA_CHECKED`**.
+
+The reported integrity digest of `westeros_evidence.json` is:
+
+```text
+SHA-256: f8da4d0ddacc35758e48b1c1396b89867cc9ed0e7e55ed8a1abba708a3dc3fe1
+```
+
+The exported **persisted ixmp** objectives (native units) are **159025.828125** for baseline and **191510.796875** for emissions-bound; difference **32484.968750** and increase **20.427479694974863%**. Small differences from GAMS console objectives are observable and must not be silently erased.
+
+**Verification boundary:** the actual sanitized bundle was validated by the author's *local* PathwaysHub process and is **not stored or independently reproduced here**. The hash shown above is author-reported from local output and has not been independently recomputed from published artifact bytes. An author could replace both local files and recompute a matching checksum; this is byte integrity and schema validation, not cryptographic signer authentication, execution attestation or external scientific review.
 
 ## Remaining verification / publication gates
 
-1. On the author's computer, inspect the saved `manifest.private.json` and confirm both `solved_scenarios` entries have `has_solution: true` and finite objective values.
-2. Generate a **new, sanitized public evidence summary** with explicit source commit, runner revision, GAMS/MESSAGEix/solver versions, scenario names/objectives and integrity hashes for publishable derived files. Never publish raw GAMS logs, licence identifiers, access codes, GDX files, the HSQLDB database, or private executed notebooks.
-3. The dedicated [Westeros handoff contract](westeros_contract.md) and local [ResidualPathways exporter](https://github.com/abhijith-sivaprasadan/residual-pathways/blob/main/docs/westeros_handoff.md) have now been implemented. **The successful private run has not yet been exported or ingested by PathwaysHub.** Until the author runs both commands locally and obtains `ACCEPTED_AUTHOR_REPORTED_LOCAL`, the handoff is code-and-fixture-tested only. Even then, pairwise hashes verify data integrity and schema, **not independently witnessed GAMS execution**. The pre-existing `consume` command validates a different IAMC I0 release.
-4. Seek independent reproduction and scientific review separately. These educational optimizations do not close AR6 source access, I3 accounting, or external participant gates.
+1. Optionally publish the two **manually inspected sanitized derived** JSON files and independently recompute the recorded SHA-256. Never publish raw GAMS console logs, licence identifiers, access codes, GDX files, HSQLDB files, or private executed notebooks.
+2. Capture an independent reproducible run with separately obtained input hashes, environment/solver metadata, recorded run/optimality evidence and blinded review. No GitHub CI job has executed the locally licensed GAMS solver.
+3. The existing `consume` command is an unrelated IAMC I0 coverage release contract; `consume-westeros` does **not** close AR6 source access, I3 emissions accounting or external-participant scientific-review gates.
 
 The console log also emitted notices that variables `I` and `C` were not found in GDX, despite both solver runs reaching normal completion and the runner completing its post-solve validation. Those notices warrant investigation before stronger claims about output completeness.
