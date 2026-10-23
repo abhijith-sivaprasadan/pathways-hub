@@ -39,3 +39,9 @@ The briefing can now verify a supplementary decadal trajectory by its manifest S
 ## Local MESSAGEix/GAMS milestone (2026-10-24)
 
 The author provided terminal output documenting two **actual locally solved** official Westeros training scenarios (baseline and emissions bound) with MESSAGEix 3.11.1, GAMS 54.6.0 and CPLEX. The ResidualPathways runner reported `ACTUAL_MESSAGEIX_GAMS_SOLVED`; [the scoped evidence note](docs/messageix_local_run.md) records objectives and limitations without publishing private solver/licence logs. This is **author-reported local execution**, not independently reproduced CI work or an AR6 source release. RP-07 is marked `DONE_TESTED` for this technical gate; the next gate is sanitized hash-linked publication and independent reproduction.
+
+## Hash-linked Westeros execution handoff
+
+The two-repository v1 pipeline is now implemented: `residual_pathways westeros-export` extracts an allowlisted, local-only two-scenario result from a successful private GAMS manifest, while `pathways_hub consume-westeros` checks exact artifact bytes, SHA-256, expected scenario identities, finite objectives, pinned upstream metadata and evidence scope. This is **not** the existing IAMC I0 scientific contract and does not promote a local terminal transcript to independent solver evidence.
+
+See [the Windows handoff commands and contract limits](docs/westeros_contract.md). [Synthetic integration CI](.github/workflows/westeros-handoff.yml) exercises both packages **without** executing GAMS. No user's private solver files are automatically collected, transmitted, or published.
