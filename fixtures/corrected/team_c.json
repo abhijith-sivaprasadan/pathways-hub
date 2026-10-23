@@ -1,0 +1,27 @@
+{
+  "protocol_version": "1.0.0",
+  "provenance_type": "SYNTHETIC_TEST_ONLY",
+  "model": "Synthetic-C",
+  "scenario": "Missing-Year",
+  "correction_notice": "AUTHOR_ADDED_FICTIONAL_2050_VALUE_AS_NEW_SYNTHETIC_SUBMISSION_NOT_IMPUTATION",
+  "records": [
+    {
+      "model": "Synthetic-C",
+      "scenario": "Missing-Year",
+      "region": "World",
+      "variable": "Emissions|CO2",
+      "unit": "Mt CO2/yr",
+      "year": 2030,
+      "value": 100
+    },
+    {
+      "model": "Synthetic-C",
+      "scenario": "Missing-Year",
+      "region": "World",
+      "variable": "Emissions|CO2",
+      "unit": "Mt CO2/yr",
+      "year": 2050,
+      "value": 60
+    }
+  ]
+}
