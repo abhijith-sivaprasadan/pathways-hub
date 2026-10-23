@@ -57,6 +57,7 @@ def run_simulated_cycle(root, output):
     accepted={
         "schema_version":"synthetic-cycle.v1",
         "protocol_version":p["protocol_version"],
+        "protocol_sha256":digest(p),
         "evidence_tier":"SIMULATION_ONLY",
         "records":{k:{"source_sha256":digest(final[k]),
                       "status":second[k]["status"],
