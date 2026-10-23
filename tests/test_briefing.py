@@ -75,3 +75,22 @@ def test_signed_decadal_briefing_requires_manifest_bound_sha():
     assert "1 of 1 matched source observations are negative" in report
     with pytest.raises(BriefingError, match="SHA-256"):
         make_briefing(manifest, raw, milestones=MILESTONES, trajectory_raw=trajectory + b" ")
+
+
+def test_westeros_local_solve_advances_next_action_without_overclaiming():
+    manifest, raw = bundle()
+    report = make_briefing(manifest, raw, milestones=MILESTONES)
+    assert "RP-07" in report and "DONE_TESTED" in report
+    assert "Publish a sanitized, hash-linked local MESSAGEix/GAMS Westeros solve summary" in report
+    assert "do not claim CI execution, AR6 relevance or human endorsement" in report
+    assert "Execute an official MESSAGEix/GAMS baseline" not in report
+
+
+def test_westeros_unfinished_milestone_still_calls_for_actual_solve():
+    manifest, raw = bundle()
+    milestones = json.loads(json.dumps(MILESTONES))
+    milestone = next(m for m in milestones["milestones"] if m["id"] == "RP-07")
+    milestone["status"] = "IN_PROGRESS"
+    report = make_briefing(manifest, raw, milestones=milestones)
+    assert "Execute an official MESSAGEix/GAMS baseline" in report
+    assert "Publish a sanitized, hash-linked local MESSAGEix/GAMS" not in report
