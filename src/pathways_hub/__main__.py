@@ -16,12 +16,19 @@ def main():
     consume.add_argument("--manifest", required=True)
     consume.add_argument("--artifact", help="results.json that corresponds to manifest dataset_sha256")
     consume.add_argument("--output", default="outputs/contract")
+    review = sub.add_parser("review-ledger", help="Validate checksum event ledger and approval separation")
+    review.add_argument("--input", required=True)
+    review.add_argument("--output", default="outputs/review/validation.json")
     args = parser.parse_args()
     if args.command == "intake":
         p = read_json(args.protocol)
         rows = [validate_submission(read_json(f), p, Path(f).name) for f in args.submissions]
         x = write_report(rows, p, args.output)
         print(f"Simulated intake: {len(rows)} submissions, {x['issue_count']} issues")
+    elif args.command == "review-ledger":
+        from .review import run_review
+        result = run_review(args.input, args.output)
+        print(result["status"], result["last_state"])
     elif args.command == "consume":
         data = Path(args.artifact).read_bytes() if args.artifact else None
         decision = validate_release(read_json(args.manifest), data)

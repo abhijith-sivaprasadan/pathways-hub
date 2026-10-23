@@ -25,3 +25,7 @@ The science companion is https://github.com/abhijith-sivaprasadan/residual-pathw
 Actual outside participants and independent expert review; human scientific approval; multi-party decision and milestone register; long-term publication workflow; confidential submission handling. A simulated test is evidence of working software, not evidence of managing an international consortium.
 
 See docs/operations.md and docs/roadmap.md.
+
+## Human review workflow scaffold
+
+The review-ledger command validates a checksum-linked research review chain with distinct schema, review, approval and publication states, including negative tests for forged modifications, self-review and simulated approval. There is **no** real external participant or authentication system in this prototype. See docs/review_protocol_v2.md.
