@@ -87,3 +87,23 @@ def test_wrong_contract_version_fails():
     m = manifest()
     m["schema_version"] = "2.0.0"
     assert "SCHEMA_VERSION_MISMATCH" in validate_release(m, b'{"ok":true}')["problems"]
+
+
+def test_unsupported_i3_source_artifact_fails_even_if_manifest_claims_verified():
+    raw = b'{"accounting":{"verified_i3_records":[]}}'
+    m = manifest(raw)
+    m["identifiability_level"] = "I3"
+    m["scientific_status"] = "I3_VERIFIED"
+    assert "NO_I3_SOURCE_RECORDS" in validate_release(m, raw)["problems"]
+
+
+def test_i3_provenance_fails_when_component_checks_missing():
+    import json
+    raw = json.dumps({"accounting": {"verified_i3_records": [
+        {"semantics_pass": True, "source_precision_pass": True,
+         "materiality_pass": True, "reconciliation_pass": True, "provenance_pass": False}
+    ]}}).encode()
+    m = manifest(raw)
+    m["identifiability_level"] = "I3"
+    m["scientific_status"] = "I3_VERIFIED"
+    assert "I3_RECORD_GATE_FAILURE" in validate_release(m, raw)["problems"]

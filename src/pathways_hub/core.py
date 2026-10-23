@@ -82,9 +82,22 @@ def validate_release(manifest, raw_artifact=None):
         problems.append("UNKNOWN_IDENTIFIABILITY")
     if level == "I3" and manifest.get("scientific_status") != "I3_VERIFIED":
         problems.append("I3_NOT_VERIFIED")
+    if level == "I3":
+        try:
+            reported = json.loads((raw_artifact or b"").decode("utf-8"))
+            evidence = reported["accounting"]["verified_i3_records"]
+            if not evidence or not isinstance(evidence, list):
+                problems.append("NO_I3_SOURCE_RECORDS")
+            elif any(not isinstance(e, dict) or not all(
+                e.get(k) is True for k in ("semantics_pass", "source_precision_pass",
+                    "materiality_pass", "reconciliation_pass", "provenance_pass"))
+                    for e in evidence):
+                problems.append("I3_RECORD_GATE_FAILURE")
+        except (ValueError, KeyError, TypeError, UnicodeError):
+            problems.append("NO_I3_SOURCE_RECORDS")
     if problems:
         return {"status": "BLOCKED", "problems": sorted(set(problems))}
-    return {"status": "READY_SCIENTIFIC_CLAIMS" if level == "I3" else "READY_COVERAGE_ONLY",
+    return {"status": "READY_FOR_HUMAN_SCIENTIFIC_REVIEW" if level == "I3" else "READY_COVERAGE_ONLY",
             "release_id": manifest["release_id"], "source_commit": manifest["source_commit"],
             "identifiability_level": level,
             "disclaimer": "Automated contract acceptance is not scientific peer review."}
