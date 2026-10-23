@@ -35,3 +35,7 @@ The review-ledger command validates a checksum-linked research review chain with
 The briefing command generates a workstream status memo only from a source-artifact-hash-verified ResidualPathways release and an explicitly declared v3 milestone register. It refuses I3/gross claims while data remain I0. See docs/briefing_policy.md. GitHub Actions publishes the reproducible briefing artifact with each upstream-integration run.
 
 The briefing can now verify a supplementary decadal trajectory by its manifest SHA-256 and accurately disclose signed negative CO2 observations without inferring gross emissions.
+
+## Local MESSAGEix/GAMS milestone (2026-10-24)
+
+The author provided terminal output documenting two **actual locally solved** official Westeros training scenarios (baseline and emissions bound) with MESSAGEix 3.11.1, GAMS 54.6.0 and CPLEX. The ResidualPathways runner reported `ACTUAL_MESSAGEIX_GAMS_SOLVED`; [the scoped evidence note](docs/messageix_local_run.md) records objectives and limitations without publishing private solver/licence logs. This is **author-reported local execution**, not independently reproduced CI work or an AR6 source release. RP-07 is marked `DONE_TESTED` for this technical gate; the next gate is sanitized hash-linked publication and independent reproduction.
