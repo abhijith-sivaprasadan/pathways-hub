@@ -88,6 +88,72 @@
       "status": "DONE_TESTED",
       "gate": "24 distinct World vetted cases C1-C8 x3, 7 six-variable-complete, 19 arithmetic-diagnostic-capable; zero human reviews and zero verified I3",
       "evidence_url": "https://github.com/abhijith-sivaprasadan/residual-pathways/blob/main/docs/research_note_02.md"
+    },
+    {
+      "id": "RP-11",
+      "name": "Provisional accounting quantization/materiality gates",
+      "status": "DONE_TESTED",
+      "gate": "Synthetic exact, cancellation, overlap, missing land, rounding-unknown and fossil CCS failure checks; real I3 still blocked"
+    },
+    {
+      "id": "RP-12",
+      "name": "2030–2100 vetted cohort robustness",
+      "status": "DONE_TESTED",
+      "gate": "352 category-year-variable source records and model-label-balanced coverage, passed source CI"
+    },
+    {
+      "id": "RP-13",
+      "name": "Non-CO2 2050 source-metric pilot",
+      "status": "DONE_TESTED",
+      "gate": "N2O native kt mass source; original/corrected AR6 GWP100 method; methane conversion blocked without origin"
+    },
+    {
+      "id": "RP-14",
+      "name": "Independent Pyomo/HiGHS synthetic validation",
+      "status": "DONE_TESTED",
+      "gate": "Six actual Pyomo models match independently authored SciPy LP cases, NOT MESSAGEix"
+    },
+    {
+      "id": "RP-15",
+      "name": "Source-linked candidate innovation taxonomy",
+      "status": "DONE_TESTED",
+      "gate": "12 candidate hypotheses and scope links; NO systematic evidence review or causal attribution"
+    },
+    {
+      "id": "RP-16",
+      "name": "Machine-generated accessible source-scoped policy brief and chart",
+      "status": "DONE_TESTED",
+      "gate": "Coverage-only figure, one-page derived brief and SHA manifest"
+    },
+    {
+      "id": "RP-17",
+      "name": "Unreviewed source-grounded v3 working-paper draft",
+      "status": "DONE_TESTED",
+      "gate": "Full 2700+ word manuscript draft; no peer review, no gross residual emissions estimate"
+    },
+    {
+      "id": "RP-18",
+      "name": "24 individual model-specific accounting reviews",
+      "status": "NEEDS_EXTERNAL_REVIEW",
+      "gate": "Official source provenance, original precision and physically disjoint source documentation for each case"
+    },
+    {
+      "id": "PH-05",
+      "name": "Full fictional 3-team correction exercise",
+      "status": "DONE_TESTED",
+      "gate": "Initial rejected fixtures, explicit corrected synthetic submissions, issue decisions, revalidation and deterministic fixture release hash"
+    },
+    {
+      "id": "PH-06",
+      "name": "Board/RACI/handover and governance",
+      "status": "DONE_TESTED",
+      "gate": "Declared milestone status report, fictional RACI, documented security and 1-hour pilot protocol"
+    },
+    {
+      "id": "PH-07",
+      "name": "Genuine external independent usability and scientific exchange",
+      "status": "NEEDS_EXTERNAL_REVIEW",
+      "gate": "Separate consented external actors; no synthetic identity upgraded to authentic coordination"
     }
   ]
 }
