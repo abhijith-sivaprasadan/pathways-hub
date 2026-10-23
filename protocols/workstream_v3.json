@@ -43,7 +43,7 @@
       "id": "RP-07",
       "name": "MESSAGEix Westeros GAMS baseline and interventions",
       "status": "DONE_TESTED",
-      "gate": "Author-provided local Windows solve transcript (2026-10-24): official MESSAGEix 3.11.1 Westeros baseline and emissions bound both optimal with GAMS 54.6.0/CPLEX; local runner status ACTUAL_MESSAGEIX_GAMS_SOLVED. Public sanitized manifest, independent reproduction and reviewer sign-off remain pending.",
+      "gate": "Author-reported Windows MESSAGEix 3.11.1/GAMS 54.6.0 local optimal baseline and emissions-bound solves; sanitized two-file bundle exported and accepted by local PathwaysHub checksum+schema verifier (2026-10-24). Author-reported artifact SHA-256 documented; public artifact publication and independent solver reproduction remain pending.",
       "evidence_url": "https://github.com/abhijith-sivaprasadan/pathways-hub/blob/main/docs/messageix_local_run.md"
     },
     {
