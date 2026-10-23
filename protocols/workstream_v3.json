@@ -43,7 +43,7 @@
       "id": "RP-07",
       "name": "MESSAGEix Westeros GAMS baseline and interventions",
       "status": "IN_PROGRESS",
-      "gate": "User reports obtaining a GAMS license. Pinned official Westeros runner implemented; need a successful local GAMS/MESSAGEix baseline, wind capex variant, and emissions-bound solve with retained logs and solved_manifest.json before marking DONE_TESTED.",
+      "gate": "GAMS license acquired (user-reported); executable, solver validity and official Westeros baseline/emissions-bound must still be run locally. Pinned local runner available in ResidualPathways.",
       "evidence_url": "https://github.com/abhijith-sivaprasadan/residual-pathways/blob/main/docs/messageix_westeros.md"
     },
     {
