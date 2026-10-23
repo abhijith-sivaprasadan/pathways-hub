@@ -1,0 +1,26 @@
+{
+  "protocol_version": "1.0.0",
+  "provenance_type": "SYNTHETIC_TEST_ONLY",
+  "model": "Synthetic-B",
+  "scenario": "Wrong-Units",
+  "records": [
+    {
+      "model": "Synthetic-B",
+      "scenario": "Wrong-Units",
+      "region": "World",
+      "variable": "Emissions|CO2",
+      "unit": "Gt CO2/yr",
+      "year": 2030,
+      "value": 100
+    },
+    {
+      "model": "Synthetic-B",
+      "scenario": "Wrong-Units",
+      "region": "World",
+      "variable": "Emissions|CO2",
+      "unit": "Gt CO2/yr",
+      "year": 2050,
+      "value": 80
+    }
+  ]
+}

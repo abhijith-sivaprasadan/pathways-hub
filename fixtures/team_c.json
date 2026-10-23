@@ -1,0 +1,17 @@
+{
+  "protocol_version": "1.0.0",
+  "provenance_type": "SYNTHETIC_TEST_ONLY",
+  "model": "Synthetic-C",
+  "scenario": "Missing-Year",
+  "records": [
+    {
+      "model": "Synthetic-C",
+      "scenario": "Missing-Year",
+      "region": "World",
+      "variable": "Emissions|CO2",
+      "unit": "Mt CO2/yr",
+      "year": 2030,
+      "value": 100
+    }
+  ]
+}

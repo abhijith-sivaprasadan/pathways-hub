@@ -1,0 +1,36 @@
+name: Synthetic intake and release contract checks
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: python -m pip install -e ".[dev]"
+      - run: python -m pytest -q
+      - name: Run complete clearly labelled synthetic exercise
+        run: python -m pathways_hub intake --protocol protocols/v1.json --submissions fixtures/team_a.json fixtures/team_b.json fixtures/team_c.json --output outputs/exercise
+      - name: Verify issues and evidence boundary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x = json.loads(Path("outputs/exercise/status.json").read_text())
+          assert x["evidence_level"] == "SIMULATION_ONLY"
+          assert x["status_counts"] == {"ACCEPTED_SCHEMA_ONLY": 1, "REJECTED": 2}
+          assert x["issue_count"] >= 2
+          assert "SYNTHETIC_TEST_ONLY" in Path("outputs/exercise/briefing.md").read_text()
+          print("All test-intake assertions passed.")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-intake-audit
+          path: outputs/exercise/
+          retention-days: 30
