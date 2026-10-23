@@ -39,10 +39,21 @@ jobs:
           assert actual["comparison"]["rows"] == expected["rows"]
           print("Cross-repo source SHA verified, scientific claim remains coverage only.")
           PY
+      - name: Build evidence-scoped scientific and milestone briefing
+        run: |
+          python -m pathways_hub briefing --manifest outputs/science/release/manifest.json --artifact outputs/science/results.json --milestones protocols/workstream_v3.json --output outputs/briefings/scientific_status.md
+          python - <<'PY'
+          from pathlib import Path
+          t=Path("outputs/briefings/scientific_status.md").read_text()
+          assert "Neither residual gross CO2 nor carbon dioxide removal" in t
+          assert "READY_COVERAGE_ONLY" in t
+          assert "AR6 World" in t
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: verified-cross-repo-handoff
           path: |
             outputs/science/
             outputs/contract/
+            outputs/briefings/
           retention-days: 30

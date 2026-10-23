@@ -19,12 +19,21 @@ def main():
     review = sub.add_parser("review-ledger", help="Validate checksum event ledger and approval separation")
     review.add_argument("--input", required=True)
     review.add_argument("--output", default="outputs/review/validation.json")
+    brief = sub.add_parser("briefing", help="Evidence-locked briefing from exact science artifact")
+    brief.add_argument("--manifest", required=True)
+    brief.add_argument("--artifact", required=True)
+    brief.add_argument("--milestones", default="protocols/workstream_v3.json")
+    brief.add_argument("--output", default="outputs/briefings/coverage.md")
     args = parser.parse_args()
     if args.command == "intake":
         p = read_json(args.protocol)
         rows = [validate_submission(read_json(f), p, Path(f).name) for f in args.submissions]
         x = write_report(rows, p, args.output)
         print(f"Simulated intake: {len(rows)} submissions, {x['issue_count']} issues")
+    elif args.command == "briefing":
+        from .briefing import run_briefing
+        result = run_briefing(args.manifest, args.artifact, args.milestones, args.output)
+        print("Wrote evidence-locked briefing:", result)
     elif args.command == "review-ledger":
         from .review import run_review
         result = run_review(args.input, args.output)

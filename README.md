@@ -29,3 +29,7 @@ See docs/operations.md and docs/roadmap.md.
 ## Human review workflow scaffold
 
 The review-ledger command validates a checksum-linked research review chain with distinct schema, review, approval and publication states, including negative tests for forged modifications, self-review and simulated approval. There is **no** real external participant or authentication system in this prototype. See docs/review_protocol_v2.md.
+
+## Evidence-constrained technical briefing
+
+The briefing command generates a workstream status memo only from a source-artifact-hash-verified ResidualPathways release and an explicitly declared v3 milestone register. It refuses I3/gross claims while data remain I0. See docs/briefing_policy.md. GitHub Actions publishes the reproducible briefing artifact with each upstream-integration run.

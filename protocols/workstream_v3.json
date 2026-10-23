@@ -1,0 +1,79 @@
+{
+  "schema_version": "workstream.v1",
+  "project": "Independent ResidualPathways and PathwaysHub study",
+  "evidence_level": "AUTHOR_REPORTED_REPOSITORY_STATUS",
+  "milestones": [
+    {
+      "id": "RP-01",
+      "name": "Pinned official public tutorial pilot",
+      "status": "DONE_TESTED",
+      "gate": "Reproduce parser/pyam comparison in CI"
+    },
+    {
+      "id": "RP-02",
+      "name": "Verified 2050 CD-LINKS cohort",
+      "status": "DONE_TESTED",
+      "gate": "Cross-check all 18 source-reported CO2 observations"
+    },
+    {
+      "id": "RP-03",
+      "name": "Source-licensed AR6 World and metadata access",
+      "status": "BLOCKED",
+      "gate": "Download under permitted access and record manifest"
+    },
+    {
+      "id": "RP-04",
+      "name": "AR6 model-scenario variable coverage and class I3",
+      "status": "NOT_STARTED",
+      "gate": "Real dataset/metadata/source definitions, reviewed partition"
+    },
+    {
+      "id": "RP-05",
+      "name": "Gas metric and source precision pilot",
+      "status": "IN_PROGRESS",
+      "gate": "Quantization tests and IPCC 2025 errata version reconciliation"
+    },
+    {
+      "id": "RP-06",
+      "name": "Synthetic HiGHS controlled intervention",
+      "status": "DONE_TESTED",
+      "gate": "Executed optimisation and numerical constraints CI"
+    },
+    {
+      "id": "RP-07",
+      "name": "MESSAGEix Westeros GAMS baseline and interventions",
+      "status": "BLOCKED",
+      "gate": "Actual executable GAMS licensed install and solver artifacts"
+    },
+    {
+      "id": "RP-08",
+      "name": "Literature and innovation-gap synthesis",
+      "status": "IN_PROGRESS",
+      "gate": "Documented inclusion process and tested evidence claims"
+    },
+    {
+      "id": "PH-01",
+      "name": "Automated synthetic intake and issue register",
+      "status": "DONE_TESTED",
+      "gate": "Tests and CI are green"
+    },
+    {
+      "id": "PH-02",
+      "name": "Signed or authenticated human review",
+      "status": "NEEDS_EXTERNAL_REVIEW",
+      "gate": "Independently authenticated identities and permissions"
+    },
+    {
+      "id": "PH-03",
+      "name": "Actual external submitter/reviewer exercise",
+      "status": "NEEDS_EXTERNAL_REVIEW",
+      "gate": "Consenting, non-author participants and permissioned records"
+    },
+    {
+      "id": "PH-04",
+      "name": "Evidence-constrained briefing from science releases",
+      "status": "IN_PROGRESS",
+      "gate": "Real pinned source, validated contract, no gross overclaim"
+    }
+  ]
+}
