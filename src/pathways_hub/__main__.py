@@ -28,12 +28,19 @@ def main():
     cycle = sub.add_parser("simulate-cycle",help="Run FICTIONAL three-team correction and SHA release")
     cycle.add_argument("--root",default=".")
     cycle.add_argument("--output",default="outputs/synthetic_cycle")
+    board = sub.add_parser("status-board",help="Generate status tracker from author-declared v3 milestones")
+    board.add_argument("--source",default="protocols/workstream_v3.json")
+    board.add_argument("--output",default="outputs/v3_status")
     args = parser.parse_args()
     if args.command == "intake":
         p = read_json(args.protocol)
         rows = [validate_submission(read_json(f), p, Path(f).name) for f in args.submissions]
         x = write_report(rows, p, args.output)
         print(f"Simulated intake: {len(rows)} submissions, {x['issue_count']} issues")
+    elif args.command == "status-board":
+        from .status_board import write_board
+        r=write_board(args.source,args.output)
+        print("Status board items:",len(r["items"]),"author-declared only")
     elif args.command == "simulate-cycle":
         from .simulation import run_simulated_cycle
         r=run_simulated_cycle(args.root,args.output)

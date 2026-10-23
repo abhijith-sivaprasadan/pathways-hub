@@ -42,10 +42,21 @@ jobs:
           assert p["scientific_approval"]=="NOT_CLAIMED"
           assert p["human_coordination"]=="NOT_DEMONSTRATED"
           PY
+      - name: Generate evidence-limited v3 status board
+        run: |
+          python -m pathways_hub status-board --source protocols/workstream_v3.json --output outputs/v3_status
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path("outputs/v3_status/status_board.json").read_text())
+          assert len(x["items"])>=10
+          assert x["evidence"]=="AUTHOR_DECLARED_MILESTONE_STATUS"
+          PY
       - uses: actions/upload-artifact@v4
         with:
           name: synthetic-intake-audit
           path: |
             outputs/exercise/
             outputs/synthetic_cycle/
+            outputs/v3_status/
           retention-days: 30
