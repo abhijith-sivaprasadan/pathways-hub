@@ -88,11 +88,21 @@ def make_briefing(manifest: dict, artifact: bytes, *, milestones: dict, trajecto
                         f"{last['matched_observations']} matched source observations are negative.",
                         "- Negative aggregate CO2 is not positive gross emissions. It does NOT by itself "
                         "identify net, atmospheric removal, or fossil CCS components."])
+    westeros_done = any(
+        item["id"] == "RP-07" and item["status"] == "DONE_TESTED"
+        for item in milestones["milestones"]
+    )
+    westeros_next = (
+        "3. Publish a sanitized, hash-linked local MESSAGEix/GAMS Westeros solve summary "
+        "for independent reproduction; do not claim CI execution, AR6 relevance or human endorsement."
+        if westeros_done else
+        "3. Execute an official MESSAGEix/GAMS baseline with solver logs before asserting framework experience."
+    )
     out += ["", "## Decisions for real work",
             "",
             "1. Acquire licensed AR6 World v1.1 and metadata through the official IIASA explorer; record exact source permissions.",
             "2. Audit variable coverage and accounting semantics before computing gross, net, fossil CCS or CDR.",
-            "3. Execute an official MESSAGEix/GAMS baseline with solver logs before asserting framework experience.",
+            westeros_next,
             "4. Invite independent consenting submitter/reviewer participants before asserting cross-team coordination.",
             "",
             "This document intentionally makes no claims of real external team approvals, independent verification or model calibration.",
