@@ -19,7 +19,8 @@
       "id": "RP-03",
       "name": "Source-licensed AR6 World and metadata access",
       "status": "BLOCKED",
-      "gate": "Download under permitted access and record manifest"
+      "gate": "Authoritative IIASA AR6 v1.1 Explorer source and version-specific World/metadata filenames verified (2026-10-24). Canonical direct files not acquired or independently source-authenticated; original license prohibits substantial redistribution. ResidualPathways ar6-canonical-gate implemented to hash user-obtained local files and compare 24 preselected teaching-source cases. Keep BLOCKED until original files and private provenance receipt are inspected.",
+      "evidence_url": "https://github.com/abhijith-sivaprasadan/residual-pathways/blob/main/docs/ar6_canonical_rp24_gate.md"
     },
     {
       "id": "RP-04",
@@ -136,7 +137,8 @@
       "id": "RP-18",
       "name": "24 individual model-specific accounting reviews",
       "status": "NEEDS_EXTERNAL_REVIEW",
-      "gate": "Official source provenance, original precision and physically disjoint source documentation for each case"
+      "gate": "24 model-specific semantic reviews remain undone; canonical source identity, exact variable scope, export precision, complete nonoverlapping positive/removal partitions and independent reviewer decisions are prerequisites. Seven six-variable-present teaching cases prioritized RP24-03,06,09,12,15,18,21; source-presence alone cannot be promoted to I3.",
+      "evidence_url": "https://github.com/abhijith-sivaprasadan/residual-pathways/blob/main/docs/ar6_canonical_rp24_gate.md"
     },
     {
       "id": "PH-05",
