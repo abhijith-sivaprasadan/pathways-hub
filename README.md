@@ -1,5 +1,7 @@
 # PathwaysHub
 
+**Live companion science atlas:** [Residual Pathways Atlas](https://residual-pathways-atlas.vercel.app/) — public evidence-first dashboard sourced from versioned ResidualPathways aggregate data. Its displayed workstream statuses are an author-declared snapshot, **not** human-verified scientific approvals or real partner submissions. [Source and scope](https://github.com/abhijith-sivaprasadan/residual-pathways/tree/main/atlas).
+
 A research-operations tool to validate incoming IAMC scenario submissions against a versioned protocol and produce an audit trail. **Independent open-source project**, not affiliated with IIASA. This first release tests a synthetic multi-source scenario; it does not claim to have coordinated real modelling teams.
 
 ## Reproduce
