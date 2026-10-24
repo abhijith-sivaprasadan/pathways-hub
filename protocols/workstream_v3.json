@@ -18,15 +18,15 @@
     {
       "id": "RP-03",
       "name": "Source-licensed AR6 World and metadata access",
-      "status": "BLOCKED",
-      "gate": "IIASA official AR6 v1.1 World CSV and climate metadata: download route verified, source files still absent from author's named local paths as of 2026-10-24. ResidualPathways ar6-canonical-select now selects a new 24-case climate-vetted sample directly from user-downloaded original-named World and XLSX inputs, without old teaching review packet. The old ar6-canonical-gate teaching cohort comparison remains optional. Filename and SHA are not authentication of portal origin; retain source receipt. BLOCKED until original files acquired and reviewed.",
+      "status": "IN_PROGRESS",
+      "gate": "2026-10-24 author-reported local acquisition of IIASA AR6 World v1.1 CSV (345.01 MiB) and metadata XLSX (2.64 MiB); ar6-canonical-select ran successfully, 12/12 mock tests passed, 1,202/1,202 climate-vetted metadata cases matched. The official-file SHA-256 values and direct portal download provenance have not yet been independently inspected. Keep RP-03 IN_PROGRESS until hashes/provenance are recorded, terms reviewed and file correspondence established.",
       "evidence_url": "https://github.com/abhijith-sivaprasadan/residual-pathways/blob/main/docs/ar6_canonical_rp24_gate.md"
     },
     {
       "id": "RP-04",
       "name": "AR6 model-scenario variable coverage and class I3",
       "status": "IN_PROGRESS",
-      "gate": "2050 reporting audit completed on public AR6 teaching source; canonical World v1.1 and I3 accounting still unverified"
+      "gate": "2026-10-24 source-based AR6 v1.1 named-file selection succeeded: 1,202 matching climate-vetted World scenarios; 24 purposively selected cases across C1-C8, seven with all six candidate variables, 19 with a three-term arithmetic diagnostic possible. Zero independently reviewed gross/removal partitions and zero I3. Next: actual source hashes and primary model-specific semantic/precision review."
     },
     {
       "id": "RP-05",
@@ -137,7 +137,7 @@
       "id": "RP-18",
       "name": "24 individual model-specific accounting reviews",
       "status": "NEEDS_EXTERNAL_REVIEW",
-      "gate": "24 model-specific semantic reviews remain undone; canonical source identity, exact variable scope, export precision, complete nonoverlapping positive/removal partitions and independent reviewer decisions are prerequisites. Seven six-variable-present teaching cases prioritized RP24-03,06,09,12,15,18,21; source-presence alone cannot be promoted to I3.",
+      "gate": "Fresh canonical-named ARC24 cohort now available locally. Start seven six-variable-present cases ARC24-03,06,09,12,15,18,21 with actual model/version documentation, sector definitions, signed AFOLU and fossil CCS/CDR boundaries. No automatic I3 promotions; independent scientific review remains pending.",
       "evidence_url": "https://github.com/abhijith-sivaprasadan/residual-pathways/blob/main/docs/ar6_canonical_rp24_gate.md"
     },
     {
