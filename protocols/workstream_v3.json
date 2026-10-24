@@ -137,7 +137,7 @@
       "id": "RP-18",
       "name": "24 individual model-specific accounting reviews",
       "status": "NEEDS_EXTERNAL_REVIEW",
-      "gate": "2026-10-24 actual AR6 ARC24 local residual magnitude triage: 14 nonzero raw-decimal total-CO2-minus-EIP-minus-net-AFOLU cases comprise 9 below 0.001%, 1 at 0.001-0.1%, and FOUR at 1-10%; the four are ARC24-06,09,12,21, all POLES ENGAGE, across C2/C3/C4/C7 with two positive and two negative signs. 5 exact, 5 missing. Model-level POLES convention/coupling is a falsifiable hypothesis, NOT a demonstrated error or I3 closure. Next obtain exact version-specific ENGAGE variable definitions, compare POLES model family to non-POLES controls over multiple years, and review source precision. Selection purposive, not population inference; independent reviewer still needed.",
+      "gate": "2026-10-24 original World v1.1 source-locked POLES ENGAGE four-scenario/5-year test passed locally (5 synthetic tests passed): 20/20 case-years (2030–2070) have nonzero reported total CO2 − EIP CO2 − AFOLU CO2; 3/4 case trajectories change sign, 5/20 are >=10% of largest reported term. This excludes a 2050-only discrepancy but does not establish model error, gross/CDR partition, or I3 (0). AR6 climate-assessment workflow documentation identifies four optional CO2 input categories Other/Waste/Other Capture and Removal/Product Use and an alternate reclassification step. Local test of whether these are actually reported by POLES is committed, not executed. Exact ENGAGE submission/export semantics, original precision and independent review remain required.",
       "evidence_url": "https://github.com/abhijith-sivaprasadan/residual-pathways/blob/main/docs/arc24_poles_cluster_investigation_20261024.md"
     },
     {
