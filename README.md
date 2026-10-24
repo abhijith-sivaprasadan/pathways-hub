@@ -49,3 +49,7 @@ The two-repository v1 pipeline is now implemented: `residual_pathways westeros-e
 See [the Windows handoff commands and contract limits](docs/westeros_contract.md). [Synthetic integration CI](.github/workflows/westeros-handoff.yml) exercises both packages **without** executing GAMS. No user's private solver files are automatically collected, transmitted, or published.
 
 **Local handoff milestone (2026-10-24):** the author supplied a successful `consume-westeros` terminal transcript: `ACCEPTED_AUTHOR_REPORTED_LOCAL`, `BYTE_HASH_MATCH_AND_SCHEMA_CHECKED` for both persisted ixmp objectives (159025.828125 and 191510.796875). The reported artifact SHA-256 and precision distinction are in [the evidence record](docs/messageix_local_run.md). This is not a public artifact upload, GAMS solve in CI, or independent execution attestation.
+
+## Four-year coverage-only candidate handoff
+
+A separate CLI in [coverage_contract.py](src/pathways_hub/coverage_contract.py) validates the optional ResidualPathways Atlas four-year reporting artifact against an out-of-band SHA-256, its sidecar, full category/year/variable dimensions and explicit REVIEW_PENDING / no-I3 scope. It returns ACCEPTED_COVERAGE_ONLY_UNREVIEWED on successful structural intake and does **not** infer I0 from pending scientific review. The empirical upstream candidate artifact is not yet published. See [the scoped handoff](docs/coverage_only_handoff.md).

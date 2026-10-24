@@ -7,7 +7,9 @@ ROOT=Path(__file__).resolve().parents[1]
 
 def test_status_board_from_real_declared_milestones(tmp_path):
     d=write_board(ROOT/"protocols/workstream_v3.json",tmp_path)
-    assert "BLOCKED" in d["counts"]
+    assert d["counts"]["NEEDS_EXTERNAL_REVIEW"] == 4
+    assert d["counts"]["IN_PROGRESS"] == 4
+    assert d["counts"]["DONE_TESTED"] == 17
     assert len(d["items"])>=10
     assert all(x["display_state"] for x in d["items"])
     assert "no official IIASA" in (tmp_path/"status_board.md").read_text()
