@@ -137,7 +137,7 @@
       "id": "RP-18",
       "name": "24 individual model-specific accounting reviews",
       "status": "NEEDS_EXTERNAL_REVIEW",
-      "gate": "2026-10-24 local ARC24 sign-screen successful: nine synthetic tests passed, 24 official-named selected cases screened, eight negative net AFOLU CO2 signs, eleven missing separately reported land carbon sequestration variables; I3=0. ResidualPathways exact raw-decimal aggregate-minus-EIP-minus-net-AFOLU arithmetic CLI and tests committed for private numerical check, pending actual local run. None of these prove full positive-gross/CDR accounting or support prevalence extrapolation from purposive sample. Two focused semantic reviews (ARC24-03 REMIND, ARC24-06 POLES) require original model/version documentation, source quantization and independent review.",
+      "gate": "2026-10-24 author-ran ARC24 local arithmetic audit: 13/13 synthetic regression tests pass; 24 selected cases -> five exact source-decimal total CO2 = EIP + net AFOLU, 14 nonzero residuals, five missing terms, zero unit conflicts. REMIND ARC24-03 exact with positive AFOLU, POLES ARC24-06 nonzero with negative AFOLU. Neither supports I3: magnitude, source-defined quantization, exact model/version accounting, overlap/disjoint positive/removal partitions and independent review all pending. Private residuals remain local. No arbitrary tolerance promotion or source-value rehosting.",
       "evidence_url": "https://github.com/abhijith-sivaprasadan/residual-pathways/blob/main/docs/arc24_source_provenance_and_semantic_triage_20261024.md"
     },
     {
