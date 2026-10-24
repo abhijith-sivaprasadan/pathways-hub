@@ -19,8 +19,8 @@
       "id": "RP-03",
       "name": "Source-licensed AR6 World and metadata access",
       "status": "IN_PROGRESS",
-      "gate": "2026-10-24 author-reported local acquisition of IIASA AR6 World v1.1 CSV (345.01 MiB) and metadata XLSX (2.64 MiB); ar6-canonical-select ran successfully, 12/12 mock tests passed, 1,202/1,202 climate-vetted metadata cases matched. The official-file SHA-256 values and direct portal download provenance have not yet been independently inspected. Keep RP-03 IN_PROGRESS until hashes/provenance are recorded, terms reviewed and file correspondence established.",
-      "evidence_url": "https://github.com/abhijith-sivaprasadan/residual-pathways/blob/main/docs/ar6_canonical_rp24_gate.md"
+      "gate": "2026-10-24 author-reported official IIASA v1.1 World download checksum is identical byte-for-byte to earlier public Zenodo teaching-labelled CSV (SHA-256 4cf39b6b0d968e25ed389318acb1674f92146f977e9db4bfb7970f048ff73977; 361767203 bytes). Official-named metadata SHA-256 fd1bc32db8463769e18f0560ced603a49598c12e1abfa06787ff763c55f06716 differs from prior third-party workbook. 1202/1202 climate-vetted cases match source. Verify direct portal acquisition receipt and workbook sheet-level cell concordance; metadata filename/byte hash alone is not semantic authentication. No raw sources republished.",
+      "evidence_url": "https://github.com/abhijith-sivaprasadan/residual-pathways/blob/main/docs/arc24_source_provenance_and_semantic_triage_20261024.md"
     },
     {
       "id": "RP-04",
@@ -137,8 +137,8 @@
       "id": "RP-18",
       "name": "24 individual model-specific accounting reviews",
       "status": "NEEDS_EXTERNAL_REVIEW",
-      "gate": "Fresh canonical-named ARC24 cohort now available locally. Start seven six-variable-present cases ARC24-03,06,09,12,15,18,21 with actual model/version documentation, sector definitions, signed AFOLU and fossil CCS/CDR boundaries. No automatic I3 promotions; independent scientific review remains pending.",
-      "evidence_url": "https://github.com/abhijith-sivaprasadan/residual-pathways/blob/main/docs/ar6_canonical_rp24_gate.md"
+      "gate": "24 local canonical-named ARC24 source cases selected; seven six-variable-present cases represent 4 exact model labels, four of seven in POLES ENGAGE. Initial external REMIND, POLES, COFFEE, WITCH model documentation located but not case/version-specific partition sign-off; 0 I1-I3 class reviews and 0 verified I3. Prioritize ARC24-03 REMIND CEMICS minCDR and ARC24-06 POLES ENGAGE with original submission definitions, source export precision, signed AFOLU netting, disjoint positive gross vs true atmospheric removal.",
+      "evidence_url": "https://github.com/abhijith-sivaprasadan/residual-pathways/blob/main/docs/arc24_source_provenance_and_semantic_triage_20261024.md"
     },
     {
       "id": "PH-05",
