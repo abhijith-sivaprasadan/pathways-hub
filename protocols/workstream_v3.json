@@ -43,7 +43,7 @@
       "id": "RP-07",
       "name": "MESSAGEix Westeros GAMS baseline and interventions",
       "status": "DONE_TESTED",
-      "gate": "Author-reported Windows MESSAGEix 3.11.1/GAMS 54.6.0 local optimal baseline and emissions-bound solves; sanitized two-file bundle exported and accepted by local PathwaysHub checksum+schema verifier (2026-10-24). Author-reported artifact SHA-256 documented; public artifact publication and independent solver reproduction remain pending.",
+      "gate": "Author-reported local Windows MESSAGEix/GAMS 54.6/CPLEX solves: original baseline and emissions-bound optimal; read-only cap audit found 500 MtCO2 numerically saturated using stored period durations; one isolated CO2-accounting/no-cap control solved optimally (2026-10-24), passed source/control parity gates, and matched baseline OBJ to stored precision. Local PathwaysHub SHA+schema handoff completed for original two cases only. New three-case derived output is private/unpublished; independent reproduction, full emission dual and external scientific review remain pending.",
       "evidence_url": "https://github.com/abhijith-sivaprasadan/pathways-hub/blob/main/docs/messageix_local_run.md"
     },
     {
