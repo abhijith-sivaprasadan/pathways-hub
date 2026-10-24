@@ -54,4 +54,18 @@ The console log also emitted notices that variables `I` and `C` were not found i
 
 The author supplied output from the read-only ResidualPathways `westeros-cap-check` run against the **same saved emissions-bound scenario**. Eight local unit tests passed, and the local checker reported **`NUMERICALLY_SATURATED`**: bound `500.0`, calculated average annual emissions `500.0`, slack `0.0`, period durations `10.0/10.0/10.0` for model years `700/710/720`, with duration source `SAVED_SCENARIO_PARAMETER`, scaling `1.0` from the pinned GAMS default, and comparison tolerance `0.0005`. The author's separately pasted saved `EMISS` data were 350.5697571642012, 568.5098361190279 and 580.9204067167708 for Westeros, not the separate duplicate `World` node.
 
-This establishes **numerical emissions-bound saturation from the author's locally saved model state**; it is not a newly solved scenario, a certified carbon shadow price or independent GAMS reproduction. The prior `EMISSION_CONSTRAINT` retrieval returned no persisted equation records, so `shadow_price_status` remains `NOT_ESTABLISHED`. The next model experiment (emissions-accounting-only, no bound) is implemented in ResidualPathways but **not yet locally executed**. The independent IAMC/AR6/I3 scientific release gate is unchanged.
+This establishes **numerical emissions-bound saturation from the author's locally saved model state**; it is not a newly solved scenario, a certified carbon shadow price or independent GAMS reproduction. The prior `EMISSION_CONSTRAINT` retrieval returned no persisted equation records, so `shadow_price_status` remains `NOT_ESTABLISHED`. The model experiment adding CO2 accounting but no cap was **subsequently executed successfully** (see the three-case control evidence below). The independent IAMC/AR6/I3 scientific release gate is unchanged.
+
+## Three-case Westeros control — completed locally, author reported (2026-10-24 02:24 local)
+
+The author supplied a PowerShell terminal transcript after pulling ResidualPathways commit `8dd9c9c`. The corrected cross-platform clone used its own private HSQLDB and retained CO2 accounting while removing only the emission-bound parameter entries.
+
+- Five control-runner tests passed.
+- GAMS **54.6.0 / CPLEX** solved an additional LP to **optimality** with **normal completion**; console objective **159025.830480** (native units).
+- Runner output: `ACTUAL_MESSAGEIX_GAMS_CONTROL_SOLVED`, `Baseline and control numerically equivalent: True`, and `Isolated cap objective effect: 32484.96875` native units.
+- Source original stored objectives: baseline **159025.828125**, capped **191510.796875**. The control stored value is arithmetically implied to equal the baseline at printed precision; the actual private `three_case_comparison.json` has **not** been provided for independent inspection.
+- Private run directory under `results/westeros_control_private/20261024T002431Z_f8428b42/` remains **local-only**.
+
+**Research inference:** In the fixed-input emissions-accounting variant, the **~20.43%** higher objective is attributable to the **imposed emissions bound**, rather than the mere presence of emissions bookkeeping. The earlier saved-duration audit independently of this new solve found cap saturation at **500 average-annual MtCO2**, with zero slack. The constraint dual and a verified carbon shadow price remain unavailable.
+
+The controlled source scenario is an educational Westeros model, **not** a real-world calibrated energy-transition result. This added private solve does not satisfy PathwaysHub's independent-reproduction, AR6 source/provenance or I3 accounting requirements. The pasted GAMS log contains private licensee/account details; do not commit or publish it. The next release should comprise manually reviewed, sanitized derived outputs with independent checksums, not the raw HSQLDB, logs or GDX.
