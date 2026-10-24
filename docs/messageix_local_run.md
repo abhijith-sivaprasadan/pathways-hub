@@ -49,3 +49,9 @@ The exported **persisted ixmp** objectives (native units) are **159025.828125** 
 3. The existing `consume` command is an unrelated IAMC I0 coverage release contract; `consume-westeros` does **not** close AR6 source access, I3 emissions accounting or external-participant scientific-review gates.
 
 The console log also emitted notices that variables `I` and `C` were not found in GDX, despite both solver runs reaching normal completion and the runner completing its post-solve validation. Those notices warrant investigation before stronger claims about output completeness.
+
+## Follow-up saved-emissions reconciliation — author reported (2026-10-24)
+
+The author supplied output from the read-only ResidualPathways `westeros-cap-check` run against the **same saved emissions-bound scenario**. Eight local unit tests passed, and the local checker reported **`NUMERICALLY_SATURATED`**: bound `500.0`, calculated average annual emissions `500.0`, slack `0.0`, period durations `10.0/10.0/10.0` for model years `700/710/720`, with duration source `SAVED_SCENARIO_PARAMETER`, scaling `1.0` from the pinned GAMS default, and comparison tolerance `0.0005`. The author's separately pasted saved `EMISS` data were 350.5697571642012, 568.5098361190279 and 580.9204067167708 for Westeros, not the separate duplicate `World` node.
+
+This establishes **numerical emissions-bound saturation from the author's locally saved model state**; it is not a newly solved scenario, a certified carbon shadow price or independent GAMS reproduction. The prior `EMISSION_CONSTRAINT` retrieval returned no persisted equation records, so `shadow_price_status` remains `NOT_ESTABLISHED`. The next model experiment (emissions-accounting-only, no bound) is implemented in ResidualPathways but **not yet locally executed**. The independent IAMC/AR6/I3 scientific release gate is unchanged.
