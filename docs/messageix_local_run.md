@@ -63,9 +63,15 @@ The author supplied a PowerShell terminal transcript after pulling ResidualPathw
 - Five control-runner tests passed.
 - GAMS **54.6.0 / CPLEX** solved an additional LP to **optimality** with **normal completion**; console objective **159025.830480** (native units).
 - Runner output: `ACTUAL_MESSAGEIX_GAMS_CONTROL_SOLVED`, `Baseline and control numerically equivalent: True`, and `Isolated cap objective effect: 32484.96875` native units.
-- Source original stored objectives: baseline **159025.828125**, capped **191510.796875**. The control stored value is arithmetically implied to equal the baseline at printed precision; the actual private `three_case_comparison.json` has **not** been provided for independent inspection.
+- Source original stored objectives: baseline **159025.828125**, capped **191510.796875**. The author subsequently inspected the saved `three_case_comparison.json` directly and confirmed the **stored control objective is exactly 159025.828125**, equal to baseline, and the six coal/wind ACT rows for 700/710/720 likewise match the baseline. CAP and CAP_NEW rows have not been pasted for separate inspection.
 - Private run directory under `results/westeros_control_private/20261024T002431Z_f8428b42/` remains **local-only**.
 
 **Research inference:** In the fixed-input emissions-accounting variant, the **~20.43%** higher objective is attributable to the **imposed emissions bound**, rather than the mere presence of emissions bookkeeping. The earlier saved-duration audit independently of this new solve found cap saturation at **500 average-annual MtCO2**, with zero slack. The constraint dual and a verified carbon shadow price remain unavailable.
 
 The controlled source scenario is an educational Westeros model, **not** a real-world calibrated energy-transition result. This added private solve does not satisfy PathwaysHub's independent-reproduction, AR6 source/provenance or I3 accounting requirements. The pasted GAMS log contains private licensee/account details; do not commit or publish it. The next release should comprise manually reviewed, sanitized derived outputs with independent checksums, not the raw HSQLDB, logs or GDX.
+
+## Three-case analysis publication gate
+
+ResidualPathways now provides [westeros-case-study](https://github.com/abhijith-sivaprasadan/residual-pathways/blob/main/docs/westeros_three_case_case_study.md), a read-only command consuming the private saved three-case comparison JSON and the separately hashed cap audit. It independently recalculates all 36 source ACT/CAP/CAP_NEW rows, objectives, production balances, numerical cap saturation, and emits explicitly derived Markdown, JSON, CSV, two SVG figures, and SHA-256 file inventory under a gitignored folder. **This code has been committed but has not been run on the actual author's private files.**
+
+This case-study package has **not** been ingested through PathwaysHub's existing `consume-westeros` verifier: that previous v1 contract covers only the original **two** tutorial scenarios. Neither contract may be repurposed for the new three-case study without a separate, narrowly typed published evidence schema and explicit publication/review decision.
