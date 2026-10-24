@@ -13,6 +13,10 @@ from pathlib import Path
 import re
 
 SCHEMA = "residualpathways.coverage-only.v1"
+TOP_FIELDS = {"schema", "version", "scope", "evidence", "science_review_state",
+              "i3_verified", "physical_accounting", "source_authentication",
+              "metadata_concordance_status", "sha256", "metadata_sheet", "years",
+              "categories", "variables", "cohort_size", "weighting", "records", "limitations"}
 FIELDS = {"category", "year", "variable", "denominator", "reporting",
           "model_labels", "scenario_fraction", "model_label_balanced_fraction", "units"}
 CATEGORIES = [f"C{i}" for i in range(1, 9)]
@@ -55,8 +59,17 @@ def receive(raw_artifact, checksum_text, *, expected_sha256):
             doc = json.loads(raw_artifact.decode("utf-8"), object_pairs_hook=_unique_pairs)
         except (UnicodeError, ValueError) as e:
             raise CoverageContractError("Malformed JSON artifact") from e
-        if not isinstance(doc, dict) or doc.get("schema") != SCHEMA:
-            raise CoverageContractError("Unsupported scientific release schema")
+        if not isinstance(doc, dict) or set(doc) != TOP_FIELDS or doc.get("schema") != SCHEMA:
+            raise CoverageContractError("Unsupported scientific release schema or top-level field")
+        if (doc["version"] != "0.1.0-candidate"
+                or doc["scope"] != "World / climate-vetted C1-C8 / four years"
+                or doc["metadata_sheet"] != "meta_Ch3vetted_withclimate"
+                or doc["source_authentication"] != "LOCAL_FINGERPRINT_ONLY_PUBLISHER_RECEIPT_NOT_INDEPENDENTLY_VERIFIED"
+                or doc["metadata_concordance_status"] not in ("DIFFERENCES_RECORDED", "EQUIVALENT_NORMALIZED_CELLS")):
+            raise CoverageContractError("Invalid release scope, version, or provenance")
+        if (type(doc["weighting"]) is not dict or set(doc["weighting"]) != {"scenario", "model_label_balanced"}
+                or type(doc["limitations"]) is not list or not doc["limitations"]):
+            raise CoverageContractError("Missing source limitations")
         if (doc.get("science_review_state") != "REVIEW_PENDING"
                 or doc.get("i3_verified") != 0 or type(doc["i3_verified"]) is not int
                 or doc.get("physical_accounting") != "NOT_ESTABLISHED"
