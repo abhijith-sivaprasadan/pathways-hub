@@ -18,6 +18,13 @@ def bundle():
                              "units": ["Mt CO2/yr"]})
     return {
         "schema": "residualpathways.coverage-only.v1",
+        "version": "0.1.0-candidate",
+        "scope": "World / climate-vetted C1-C8 / four years",
+        "source_authentication": "LOCAL_FINGERPRINT_ONLY_PUBLISHER_RECEIPT_NOT_INDEPENDENTLY_VERIFIED",
+        "metadata_concordance_status": "DIFFERENCES_RECORDED",
+        "metadata_sheet": "meta_Ch3vetted_withclimate",
+        "weighting": {"scenario": "scenario share", "model_label_balanced": "not family weighted"},
+        "limitations": ["No physical gross accounting"],
         "science_review_state": "REVIEW_PENDING", "i3_verified": 0,
         "physical_accounting": "NOT_ESTABLISHED",
         "evidence": "EXACT_VARIABLE_REPORTING_PRESENCE_ONLY",
