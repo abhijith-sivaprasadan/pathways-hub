@@ -137,7 +137,7 @@
       "id": "RP-18",
       "name": "24 individual model-specific accounting reviews",
       "status": "NEEDS_EXTERNAL_REVIEW",
-      "gate": "ARC24-03 REMIND-MAgPIE and ARC24-06 POLES local 2050 observations checked at sign+unit level (2026-10-24). Both report positive land CDR, biomass CCS and fossil CCS. REMIND reports net-positive AFOLU and zero DAC, POLES net-negative AFOLU and positive DAC. Prütz et al. (2025, ESSD doi:10.5194/essd-17-221-2025) explicitly distinguish net AFOLU and gross land sequestration. Warning: double-subtracting land removal from net AFOLU is invalid; source-specific completeness, precision and independent review still missing, I3=0. Redacted sign-screen CLI committed, not locally executed yet.",
+      "gate": "2026-10-24 local ARC24 sign-screen successful: nine synthetic tests passed, 24 official-named selected cases screened, eight negative net AFOLU CO2 signs, eleven missing separately reported land carbon sequestration variables; I3=0. ResidualPathways exact raw-decimal aggregate-minus-EIP-minus-net-AFOLU arithmetic CLI and tests committed for private numerical check, pending actual local run. None of these prove full positive-gross/CDR accounting or support prevalence extrapolation from purposive sample. Two focused semantic reviews (ARC24-03 REMIND, ARC24-06 POLES) require original model/version documentation, source quantization and independent review.",
       "evidence_url": "https://github.com/abhijith-sivaprasadan/residual-pathways/blob/main/docs/arc24_source_provenance_and_semantic_triage_20261024.md"
     },
     {
